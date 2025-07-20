@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -11,6 +12,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+    
+    // User Management Routes
+    Route::resource('users', UserController::class);
+    Route::get('users/{user}/roles', [UserController::class, 'roles'])->name('users.roles');
+    Route::post('users/{user}/send-verification', [UserController::class, 'sendVerification'])->name('users.send-verification');
+    Route::post('users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
 });
 
 require __DIR__.'/settings.php';

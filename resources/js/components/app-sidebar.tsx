@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Users, UserPlus, Shield, Settings, UserCog } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -12,6 +12,50 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'User Management',
+        href: '/users',
+        icon: Users,
+        items: [
+            {
+                title: 'All Users',
+                href: '/users',
+                icon: Users,
+            },
+            {
+                title: 'Add User',
+                href: '/users/create',
+                icon: UserPlus,
+            },
+            {
+                title: 'User Roles',
+                href: '/users/roles',
+                icon: Shield,
+            },
+            {
+                title: 'Permissions',
+                href: '/users/permissions',
+                icon: UserCog,
+            },
+        ],
+    },
+    {
+        title: 'Settings',
+        href: '/settings',
+        icon: Settings,
+        items: [
+            {
+                title: 'General',
+                href: '/settings',
+                icon: Settings,
+            },
+            {
+                title: 'Security',
+                href: '/settings/security',
+                icon: Shield,
+            },
+        ],
     },
 ];
 
