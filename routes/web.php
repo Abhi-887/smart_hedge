@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StrategyController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -18,6 +19,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('users/roles', [UserController::class, 'roles'])->name('users.roles');
     Route::post('users/{user}/send-verification', [UserController::class, 'sendVerification'])->name('users.send-verification');
     Route::post('users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
+
+    // Strategy Management Routes
+    Route::resource('strategies', StrategyController::class);
+    Route::get('strategies/{strategy}/download-script', [StrategyController::class, 'downloadScript'])->name('strategies.download-script');
+    Route::post('strategies/{strategy}/run-test', [StrategyController::class, 'runTest'])->name('strategies.run-test');
+    Route::post('strategies/{strategy}/deploy', [StrategyController::class, 'deploy'])->name('strategies.deploy');
 
     // Broker Accounts Management
     Route::resource('broker-accounts', App\Http\Controllers\BrokerAccountController::class);

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -164,5 +165,13 @@ class User extends Authenticatable
             'badge_text' => !is_null($this->email_verified_at) ? 'Verified' : 'Unverified',
             'badge_variant' => !is_null($this->email_verified_at) ? 'default' : 'secondary',
         ];
+    }
+
+    /**
+     * Get the strategies for the user.
+     */
+    public function strategies(): HasMany
+    {
+        return $this->hasMany(Strategy::class);
     }
 }

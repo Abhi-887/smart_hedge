@@ -42,3 +42,21 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Strategy {
+    id: number;
+    user_id: number;
+    name: string;
+    description?: string;
+    script_file?: string;
+    params_json?: string;
+    is_active: boolean;
+    is_public: boolean;
+    created_at: string;
+    updated_at: string;
+    user?: User;
+    status?: string;
+    decoded_params?: Record<string, any>;
+    has_script_file?: boolean;
+    [key: string]: unknown;
+}
