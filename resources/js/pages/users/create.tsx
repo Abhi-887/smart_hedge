@@ -1,4 +1,3 @@
-import { AppShell } from '@/components/app-shell';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -11,8 +10,22 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import Heading from '@/components/heading';
+import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Save, UserPlus } from 'lucide-react';
+import { Save, UserPlus } from 'lucide-react';
+import AppLayout from '@/layouts/app-layout';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'All Users',
+        href: '/users',
+    },
+    {
+        title: 'Add User',
+        href: '/users/create',
+    },
+];
 
 interface UserCreateProps {
     // You can add roles, permissions, etc. here if needed
@@ -50,31 +63,19 @@ export default function UserCreate({}: UserCreateProps) {
     };
 
     return (
-        <AppShell>
-            <Head title="Create New User" />
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Add User" />
 
-            <div className="space-y-6">
-                {/* Page Header */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <Link href="/users">
-                            <Button variant="outline" size="sm">
-                                <ArrowLeft className="mr-2 h-4 w-4" />
-                                Back to Users
-                            </Button>
-                        </Link>
-                        <div>
-                            <h1 className="text-3xl font-bold tracking-tight">Create New User</h1>
-                            <p className="text-muted-foreground">
-                                Add a new user to your system with proper credentials
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div className="px-4 py-6">
+                <div className="space-y-8">
+                    <Heading
+                        title="Create New User"
+                        description="Add a new user to your system with proper credentials"
+                    />
 
-                {/* User Creation Form */}
-                <div className="max-w-2xl">
-                    <Card>
+                    {/* User Creation Form */}
+                    <div className="max-w-2xl">
+                        <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center">
                                 <UserPlus className="mr-2 h-5 w-5" />
@@ -204,6 +205,7 @@ export default function UserCreate({}: UserCreateProps) {
                     </Card>
                 </div>
             </div>
-        </AppShell>
+        </div>
+        </AppLayout>
     );
 }

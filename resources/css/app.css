@@ -156,4 +156,9 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    .bg-grid-pattern {
+        background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0);
+        background-size: 40px 40px;
+    }
 }

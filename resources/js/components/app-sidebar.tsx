@@ -41,6 +41,23 @@ const mainNavItems: NavItem[] = [
         ],
     },
     {
+        title: 'Broker Accounts',
+        href: '/broker-accounts',
+        icon: Folder,
+        items: [
+            {
+                title: 'All Broker Accounts',
+                href: '/broker-accounts',
+                icon: Folder,
+            },
+            {
+                title: 'Add Broker Account',
+                href: '/broker-accounts/create',
+                icon: BookOpen,
+            },
+        ],
+    },
+    {
         title: 'Settings',
         href: '/settings',
         icon: Settings,

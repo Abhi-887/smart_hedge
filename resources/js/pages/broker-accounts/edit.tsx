@@ -1,0 +1,225 @@
+// Broker Account Edit Page
+// ...will provide a form to edit an existing broker account
+
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import Heading from '@/components/heading';
+import { type BreadcrumbItem } from '@/types';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Save, BookOpen } from 'lucide-react';
+import AppLayout from '@/layouts/app-layout';
+
+const breadcrumbs = (account: any): BreadcrumbItem[] => [
+    {
+        title: 'Broker Accounts',
+        href: '/broker-accounts',
+    },
+    {
+        title: account.broker?.name || 'Broker',
+        href: `/broker-accounts/${account.id}`,
+    },
+    {
+        title: 'Edit',
+        href: `/broker-accounts/${account.id}/edit`,
+    },
+];
+
+interface BrokerAccountEditProps {
+    brokerAccount: any;
+    brokers: Array<{ id: number; name: string }>;
+}
+
+export default function BrokerAccountEdit({ brokerAccount, brokers = [] }: BrokerAccountEditProps) {
+    const { data, setData, put, processing, errors } = useForm({
+        broker_id: brokerAccount.broker_id,
+        client_code: brokerAccount.client_code,
+        api_key: brokerAccount.api_key,
+        access_token: brokerAccount.access_token,
+        refresh_token: brokerAccount.refresh_token,
+        token_expiry: brokerAccount.token_expiry || '',
+        is_active: brokerAccount.is_active,
+        notes: brokerAccount.notes || '',
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(`/broker-accounts/${brokerAccount.id}`, {
+            onSuccess: () => {
+                // Success notification would be handled by a toast system
+            },
+        });
+    };
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs(brokerAccount)}>
+            <Head title={`Edit Broker Account: ${brokerAccount.broker?.name || ''}`} />
+            <div className="px-4 py-6">
+                <div className="space-y-8">
+                    <Heading
+                        title="Edit Broker Account"
+                        description="Update your broker API account information"
+                    />
+                    <div className="max-w-2xl">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center">
+                                    <BookOpen className="mr-2 h-5 w-5" />
+                                    Broker Account Information
+                                </CardTitle>
+                                <CardDescription>
+                                    Update the details for your broker account
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    {/* Broker Selection */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="broker_id">Broker *</Label>
+                                        <select
+                                            id="broker_id"
+                                            value={data.broker_id}
+                                            onChange={e => setData('broker_id', e.target.value)}
+                                            className={`border rounded px-3 py-2 w-full ${errors.broker_id ? 'border-red-500' : ''}`}
+                                            required
+                                        >
+                                            <option value="">Select a broker</option>
+                                            {brokers.map(broker => (
+                                                <option key={broker.id} value={broker.id}>{broker.name}</option>
+                                            ))}
+                                        </select>
+                                        {errors.broker_id && (
+                                            <p className="text-sm text-red-500">{errors.broker_id}</p>
+                                        )}
+                                    </div>
+                                    {/* Client Code */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="client_code">Client Code *</Label>
+                                        <Input
+                                            id="client_code"
+                                            type="text"
+                                            value={data.client_code}
+                                            onChange={e => setData('client_code', e.target.value)}
+                                            placeholder="Enter your broker client code"
+                                            className={errors.client_code ? 'border-red-500' : ''}
+                                            required
+                                        />
+                                        {errors.client_code && (
+                                            <p className="text-sm text-red-500">{errors.client_code}</p>
+                                        )}
+                                    </div>
+                                    {/* API Key */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="api_key">API Key *</Label>
+                                        <Input
+                                            id="api_key"
+                                            type="text"
+                                            value={data.api_key}
+                                            onChange={e => setData('api_key', e.target.value)}
+                                            placeholder="Enter your broker API key"
+                                            className={errors.api_key ? 'border-red-500' : ''}
+                                            required
+                                        />
+                                        {errors.api_key && (
+                                            <p className="text-sm text-red-500">{errors.api_key}</p>
+                                        )}
+                                    </div>
+                                    {/* Access Token */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="access_token">Access Token</Label>
+                                        <Input
+                                            id="access_token"
+                                            type="text"
+                                            value={data.access_token}
+                                            onChange={e => setData('access_token', e.target.value)}
+                                            placeholder="Enter access token (if available)"
+                                            className={errors.access_token ? 'border-red-500' : ''}
+                                        />
+                                        {errors.access_token && (
+                                            <p className="text-sm text-red-500">{errors.access_token}</p>
+                                        )}
+                                    </div>
+                                    {/* Refresh Token */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="refresh_token">Refresh Token</Label>
+                                        <Input
+                                            id="refresh_token"
+                                            type="text"
+                                            value={data.refresh_token}
+                                            onChange={e => setData('refresh_token', e.target.value)}
+                                            placeholder="Enter refresh token (if available)"
+                                            className={errors.refresh_token ? 'border-red-500' : ''}
+                                        />
+                                        {errors.refresh_token && (
+                                            <p className="text-sm text-red-500">{errors.refresh_token}</p>
+                                        )}
+                                    </div>
+                                    {/* Token Expiry */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="token_expiry">Token Expiry</Label>
+                                        <Input
+                                            id="token_expiry"
+                                            type="datetime-local"
+                                            value={data.token_expiry}
+                                            onChange={e => setData('token_expiry', e.target.value)}
+                                            className={errors.token_expiry ? 'border-red-500' : ''}
+                                        />
+                                        {errors.token_expiry && (
+                                            <p className="text-sm text-red-500">{errors.token_expiry}</p>
+                                        )}
+                                    </div>
+                                    {/* Notes */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="notes">Notes</Label>
+                                        <Input
+                                            id="notes"
+                                            type="text"
+                                            value={data.notes}
+                                            onChange={e => setData('notes', e.target.value)}
+                                            placeholder="Any additional notes (optional)"
+                                            className={errors.notes ? 'border-red-500' : ''}
+                                        />
+                                        {errors.notes && (
+                                            <p className="text-sm text-red-500">{errors.notes}</p>
+                                        )}
+                                    </div>
+                                    {/* Is Active */}
+                                    <div className="flex items-center space-x-2">
+                                        <Checkbox
+                                            id="is_active"
+                                            checked={data.is_active}
+                                            onCheckedChange={checked => setData('is_active', !!checked)}
+                                        />
+                                        <Label htmlFor="is_active" className="text-sm">
+                                            Account is active
+                                        </Label>
+                                    </div>
+                                    {/* Form Actions */}
+                                    <div className="flex items-center justify-end space-x-4 pt-6 border-t">
+                                        <Link href={`/broker-accounts/${brokerAccount.id}`}>
+                                            <Button variant="outline" type="button">
+                                                Cancel
+                                            </Button>
+                                        </Link>
+                                        <Button type="submit" disabled={processing}>
+                                            <Save className="mr-2 h-4 w-4" />
+                                            {processing ? 'Saving...' : 'Save Changes'}
+                                        </Button>
+                                    </div>
+                                </form>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+        </AppLayout>
+    );
+}

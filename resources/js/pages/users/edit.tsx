@@ -1,4 +1,3 @@
-import { AppShell } from '@/components/app-shell';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -13,9 +12,26 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { type User } from '@/types';
+import Heading from '@/components/heading';
+import { type User, type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, Save, User as UserIcon, Shield, Mail } from 'lucide-react';
+import AppLayout from '@/layouts/app-layout';
+
+const breadcrumbs = (user: User): BreadcrumbItem[] => [
+    {
+        title: 'All Users',
+        href: '/users',
+    },
+    {
+        title: user.name,
+        href: `/users/${user.id}`,
+    },
+    {
+        title: 'Edit',
+        href: `/users/${user.id}/edit`,
+    },
+];
 
 interface UserEditProps {
     user: User;
@@ -62,27 +78,15 @@ export default function UserEdit({ user }: UserEditProps) {
     };
 
     return (
-        <AppShell>
+        <AppLayout breadcrumbs={breadcrumbs(user)}>
             <Head title={`Edit User: ${user.name}`} />
 
-            <div className="space-y-6">
-                {/* Page Header */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <Link href={`/users/${user.id}`}>
-                            <Button variant="outline" size="sm">
-                                <ArrowLeft className="mr-2 h-4 w-4" />
-                                Back to Profile
-                            </Button>
-                        </Link>
-                        <div>
-                            <h1 className="text-3xl font-bold tracking-tight">Edit User</h1>
-                            <p className="text-muted-foreground">
-                                Update user information and settings
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div className="px-4 py-6">
+                <div className="space-y-6">
+                    <Heading
+                        title="Edit User"
+                        description="Update user information and settings"
+                    />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* User Avatar and Status */}
@@ -258,8 +262,9 @@ export default function UserEdit({ user }: UserEditProps) {
                             </CardContent>
                         </Card>
                     </div>
+                    </div>
                 </div>
             </div>
-        </AppShell>
+        </AppLayout>
     );
 }
