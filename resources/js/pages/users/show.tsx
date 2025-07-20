@@ -20,7 +20,7 @@ interface UserShowProps {
 
 /**
  * User Detail Page Component
- * 
+ *
  * Displays comprehensive user information in a professional layout
  * Features:
  * - User avatar and basic info
@@ -33,7 +33,7 @@ export default function UserShow({ user }: UserShowProps) {
     return (
         <AppShell>
             <Head title={`User: ${user.name}`} />
-            
+
             <div className="space-y-6">
                 {/* Page Header */}
                 <div className="flex items-center justify-between">

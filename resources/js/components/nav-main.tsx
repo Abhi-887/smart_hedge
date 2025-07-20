@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
     const page = usePage();
-    
+
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarGroupLabel>Platform</SidebarGroupLabel>

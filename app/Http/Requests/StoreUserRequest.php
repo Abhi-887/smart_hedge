@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules\Password;
 
 /**
  * StoreUserRequest
- * 
+ *
  * Handles validation for creating new users.
  * Implements comprehensive validation rules following Laravel best practices.
  */

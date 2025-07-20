@@ -29,13 +29,13 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { 
-    ArrowLeft, 
-    Plus, 
-    Edit, 
-    Trash2, 
-    Shield, 
-    Users, 
+import {
+    ArrowLeft,
+    Plus,
+    Edit,
+    Trash2,
+    Shield,
+    Users,
     Settings,
     Eye,
     User
@@ -67,7 +67,7 @@ interface UserRolesProps {
 
 /**
  * User Roles Management Page Component
- * 
+ *
  * Provides comprehensive role and permission management
  * Features:
  * - Role listing with user counts
@@ -155,7 +155,7 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
     return (
         <AppShell>
             <Head title="User Roles & Permissions" />
-            
+
             <div className="space-y-6">
                 {/* Page Header */}
                 <div className="flex items-center justify-between">
@@ -236,8 +236,8 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                                         checked={createData.permissions.includes(permission.name)}
                                                         onCheckedChange={() => togglePermission(permission.name, true)}
                                                     />
-                                                    <Label 
-                                                        htmlFor={`create-perm-${permission.id}`} 
+                                                    <Label
+                                                        htmlFor={`create-perm-${permission.id}`}
                                                         className="text-sm font-normal"
                                                     >
                                                         {permission.display_name}
@@ -248,9 +248,9 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                     </div>
                                 </div>
                                 <DialogFooter>
-                                    <Button 
-                                        type="button" 
-                                        variant="outline" 
+                                    <Button
+                                        type="button"
+                                        variant="outline"
                                         onClick={() => setIsCreateDialogOpen(false)}
                                     >
                                         Cancel
@@ -332,8 +332,8 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                             <div className="flex flex-col items-center gap-2">
                                                 <Shield className="h-12 w-12 text-muted-foreground opacity-50" />
                                                 <p className="text-muted-foreground">No roles found</p>
-                                                <Button 
-                                                    variant="outline" 
+                                                <Button
+                                                    variant="outline"
                                                     size="sm"
                                                     onClick={() => setIsCreateDialogOpen(true)}
                                                 >
@@ -381,15 +381,15 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                             </TableCell>
                                             <TableCell className="text-right">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <Button 
-                                                        variant="ghost" 
+                                                    <Button
+                                                        variant="ghost"
                                                         size="sm"
                                                         onClick={() => openEditDialog(role)}
                                                     >
                                                         <Edit className="h-4 w-4" />
                                                     </Button>
-                                                    <Button 
-                                                        variant="ghost" 
+                                                    <Button
+                                                        variant="ghost"
                                                         size="sm"
                                                         onClick={() => handleDeleteRole(role)}
                                                         className="text-destructive hover:text-destructive"
@@ -462,8 +462,8 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                                         checked={editData.permissions.includes(permission.name)}
                                                         onCheckedChange={() => togglePermission(permission.name, false)}
                                                     />
-                                                    <Label 
-                                                        htmlFor={`edit-perm-${permission.id}`} 
+                                                    <Label
+                                                        htmlFor={`edit-perm-${permission.id}`}
                                                         className="text-sm font-normal"
                                                     >
                                                         {permission.display_name}
@@ -474,9 +474,9 @@ export default function UserRoles({ roles, permissions }: UserRolesProps) {
                                     </div>
                                 </div>
                                 <DialogFooter>
-                                    <Button 
-                                        type="button" 
-                                        variant="outline" 
+                                    <Button
+                                        type="button"
+                                        variant="outline"
                                         onClick={() => setIsEditDialogOpen(false)}
                                     >
                                         Cancel

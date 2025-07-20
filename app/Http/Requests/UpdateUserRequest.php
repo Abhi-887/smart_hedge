@@ -9,7 +9,7 @@ use Illuminate\Validation\Rules\Password;
 
 /**
  * UpdateUserRequest
- * 
+ *
  * Handles validation for updating existing users.
  * Implements comprehensive validation rules with consideration for existing data.
  */
@@ -138,11 +138,11 @@ class UpdateUserRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             // Custom validation logic can be added here
-            
+
             // Prevent users from changing their own role to non-admin
             $user = $this->route('user');
             $currentUser = auth()->user();
-            
+
             if ($user->id === $currentUser->id && $this->has('role') && $this->role !== 'admin') {
                 // Only add this validation if the current user is admin
                 // and they're trying to change their own role

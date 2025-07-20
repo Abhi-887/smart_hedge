@@ -14,7 +14,7 @@ use Inertia\Response;
 
 /**
  * UserController
- * 
+ *
  * Handles user management operations including CRUD operations,
  * role management, and user verification functionality.
  * Follows Laravel best practices with proper validation and authorization.
@@ -273,7 +273,7 @@ class UserController extends Controller
     {
         // Generate temporary password or send reset link
         $temporaryPassword = \Str::random(12);
-        
+
         $user->update([
             'password' => Hash::make($temporaryPassword),
         ]);

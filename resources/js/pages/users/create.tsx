@@ -20,7 +20,7 @@ interface UserCreateProps {
 
 /**
  * User Creation Page Component
- * 
+ *
  * Provides a professional form for creating new users
  * Features:
  * - Form validation with real-time feedback
@@ -52,7 +52,7 @@ export default function UserCreate({}: UserCreateProps) {
     return (
         <AppShell>
             <Head title="Create New User" />
-            
+
             <div className="space-y-6">
                 {/* Page Header */}
                 <div className="flex items-center justify-between">

@@ -67,7 +67,7 @@ class User extends Authenticatable
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $value 
+            get: fn (mixed $value, array $attributes) => $value
                 ? asset('storage/' . $value)
                 : "https://ui-avatars.com/api/?name=" . urlencode($attributes['name']) . "&background=0ea5e9&color=fff"
         );

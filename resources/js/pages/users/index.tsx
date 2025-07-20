@@ -41,7 +41,7 @@ interface UsersIndexProps {
 
 /**
  * Users Index Page Component
- * 
+ *
  * Displays a paginated list of all users with management actions
  * Features:
  * - User avatar and basic info display
@@ -64,7 +64,7 @@ export default function UsersIndex({ users }: UsersIndexProps) {
     return (
         <AppShell>
             <Head title="User Management" />
-            
+
             <div className="space-y-6">
                 {/* Page Header */}
                 <div className="flex items-center justify-between">

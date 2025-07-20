@@ -23,7 +23,7 @@ interface UserEditProps {
 
 /**
  * User Edit Page Component
- * 
+ *
  * Provides a comprehensive form for editing existing users
  * Features:
  * - Pre-populated form with current user data
@@ -64,7 +64,7 @@ export default function UserEdit({ user }: UserEditProps) {
     return (
         <AppShell>
             <Head title={`Edit User: ${user.name}`} />
-            
+
             <div className="space-y-6">
                 {/* Page Header */}
                 <div className="flex items-center justify-between">
@@ -110,9 +110,9 @@ export default function UserEdit({ user }: UserEditProps) {
                             <CardContent className="space-y-3">
                                 {/* Quick Actions */}
                                 {!user.email_verified_at && (
-                                    <Button 
-                                        variant="outline" 
-                                        size="sm" 
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
                                         className="w-full"
                                         onClick={handleSendVerificationEmail}
                                     >
@@ -120,9 +120,9 @@ export default function UserEdit({ user }: UserEditProps) {
                                         Send Verification Email
                                     </Button>
                                 )}
-                                <Button 
-                                    variant="outline" 
-                                    size="sm" 
+                                <Button
+                                    variant="outline"
+                                    size="sm"
                                     className="w-full"
                                     onClick={handleResetPassword}
                                 >
@@ -227,7 +227,7 @@ export default function UserEdit({ user }: UserEditProps) {
                                                         Email verification status
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
-                                                        {user.email_verified_at 
+                                                        {user.email_verified_at
                                                             ? `Verified on ${new Date(user.email_verified_at).toLocaleDateString()}`
                                                             : 'Email not verified'
                                                         }
