@@ -2,23 +2,7 @@
 
 namespace App\Http\Controllers;
 
-us        try {
-            $response = Http::withOptions([
-                'verify' => false, // Disable SSL verification for development
-                'timeout' => 30,
-            ])->withHeaders([
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-                'X-UserType' => 'USER',
-                'X-SourceID' => 'WEB',
-                'X-ClientLocalIP' => request()->ip(),
-                'X-ClientPublicIP' => request()->ip(),
-                'X-MACAddress' => 'fe80::216:3eff:fe1e:5561',
-            ])->post('https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1/loginByPassword', [
-                'clientcode' => config('services.angel.client_id'),
-                'password' => config('services.angel.mpin'),
-                'totp' => $this->generateTOTP(),
-            ]);ntrollers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
