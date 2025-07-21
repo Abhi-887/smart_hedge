@@ -7,28 +7,20 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx'])
-        @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        @inertia
-        <script>
-            window.Inertia = {
-                page: {
-                    component: 'errors/500',
-                    props: {
-                        status: {{ $exception->getStatusCode() ?? 500 }},
-                        message: '{{ config('app.debug') ? $exception->getMessage() : 'Internal server error' }}',
-                        @if(config('app.debug'))
-                        exception: '{{ get_class($exception) }}',
-                        file: '{{ $exception->getFile() }}',
-                        line: {{ $exception->getLine() }},
-                        trace: @json(array_slice($exception->getTrace(), 0, 10)),
-                        @endif
-                    },
-                    url: '{{ request()->url() }}',
-                    version: '{{ Inertia\Inertia::getVersion() }}'
-                }
-            };
-        </script>
+        <div id="app" data-page="{{ json_encode([
+            'component' => 'errors/500',
+            'props' => [
+                'status' => $exception->getStatusCode() ?? 500,
+                'message' => config('app.debug') ? $exception->getMessage() : 'Internal server error',
+                'exception' => config('app.debug') ? get_class($exception) : null,
+                'file' => config('app.debug') ? $exception->getFile() : null,
+                'line' => config('app.debug') ? $exception->getLine() : null,
+                'trace' => config('app.debug') ? array_slice($exception->getTrace(), 0, 10) : null,
+            ],
+            'url' => request()->url(),
+            'version' => \Inertia\Inertia::getVersion()
+        ]) }}"></div>
     </body>
 </html>

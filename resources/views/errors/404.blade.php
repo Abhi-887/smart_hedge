@@ -7,22 +7,16 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx'])
-        @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        @inertia
-        <script>
-            window.Inertia = {
-                page: {
-                    component: 'errors/404',
-                    props: {
-                        status: {{ $exception->getStatusCode() ?? 404 }},
-                        message: '{{ $exception->getMessage() ?: 'Page not found' }}',
-                    },
-                    url: '{{ request()->url() }}',
-                    version: '{{ Inertia\Inertia::getVersion() }}'
-                }
-            };
-        </script>
+        <div id="app" data-page="{{ json_encode([
+            'component' => 'errors/404',
+            'props' => [
+                'status' => $exception->getStatusCode() ?? 404,
+                'message' => $exception->getMessage() ?: 'Page not found',
+            ],
+            'url' => request()->url(),
+            'version' => \Inertia\Inertia::getVersion()
+        ]) }}"></div>
     </body>
 </html>
