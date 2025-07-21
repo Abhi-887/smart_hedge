@@ -29,6 +29,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Broker Accounts Management
     Route::resource('broker-accounts', App\Http\Controllers\BrokerAccountController::class);
     Route::post('brokers', [App\Http\Controllers\BrokerController::class, 'store'])->name('brokers.store');
+
+    // Market Data Routes
+    Route::get('market-data', [App\Http\Controllers\MarketDataController::class, 'index'])->name('market-data.index');
+    Route::get('api/market-data/gainers-losers', [App\Http\Controllers\MarketDataController::class, 'getTopGainers'])->name('api.market-data.gainers-losers');
+    Route::get('api/market-data/pcr', [App\Http\Controllers\MarketDataController::class, 'getPCRData'])->name('api.market-data.pcr');
+    Route::get('api/market-data/oi-buildup', [App\Http\Controllers\MarketDataController::class, 'getOIBuildup'])->name('api.market-data.oi-buildup');
 });
 
 require __DIR__.'/settings.php';

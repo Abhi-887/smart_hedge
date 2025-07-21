@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'angel' => [
+        'api_key' => env('ANGEL_API_KEY'),
+        'client_id' => env('ANGEL_CLIENT_ID'),
+        'mpin' => env('ANGEL_MPIN'),
+        'totp_secret' => env('ANGEL_TOTP_SECRET'),
+    ],
+
 ];
