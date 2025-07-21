@@ -26,6 +26,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('strategies/{strategy}/run-test', [StrategyController::class, 'runTest'])->name('strategies.run-test');
     Route::post('strategies/{strategy}/deploy', [StrategyController::class, 'deploy'])->name('strategies.deploy');
 
+    // Portfolio Analytics Routes
+    Route::get('portfolio-analytics', [App\Http\Controllers\PortfolioAnalyticsController::class, 'index'])->name('portfolio-analytics.index');
+    Route::get('api/portfolio-analytics', [App\Http\Controllers\PortfolioAnalyticsController::class, 'getAnalytics'])->name('api.portfolio-analytics');
+
     // Broker Accounts Management
     Route::resource('broker-accounts', App\Http\Controllers\BrokerAccountController::class);
     Route::post('brokers', [App\Http\Controllers\BrokerController::class, 'store'])->name('brokers.store');
